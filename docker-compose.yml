@@ -1,0 +1,33 @@
+services:
+  frontend:
+    build: .
+    ports:
+      - "8085:80"
+    depends_on:
+      - backend
+
+  backend:
+    build: ./backend
+    ports:
+      - "5001:5000"
+    environment:
+      - DB_HOST=mysql
+      - DB_USER=root
+      - DB_PASSWORD=123456
+      - DB_NAME=kitabghar
+    depends_on:
+      - mysql
+
+  mysql:
+    image: mysql:8
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: Mysql17?
+      MYSQL_DATABASE: kitabghar
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+
+volumes:
+  mysql_data:
