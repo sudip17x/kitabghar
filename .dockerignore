@@ -1,0 +1,11 @@
+# Ignore node_modules and build cache
+node_modules
+build
+dist
+.git
+.gitignore
+Dockerfile
+docker-compose.yml
+*.md
+npm-debug.log
+.env

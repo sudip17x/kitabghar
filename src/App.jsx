@@ -36,32 +36,41 @@ const bookCategories = [
   { name: 'Miscellaneous', subcategories: ['Travel Guides', 'Hobby Books', 'Handbooks', 'Journals', 'Misc. Collections'] }
 ];
 
-// Notification Component
+// ✅ Fixed Notification Component
 const Notification = ({ notification, onClose }) => {
-  if (!notification) return null;
-
+  // 🧠 Hooks must always be at top (unconditional)
   useEffect(() => {
+    if (!notification) return; // ✅ Conditional logic moved *inside* the hook
     const timer = setTimeout(() => {
       onClose();
     }, 3000); // Auto-dismiss after 3 seconds
     return () => clearTimeout(timer);
   }, [notification, onClose]);
 
+  // 🧩 Conditional rendering AFTER hooks
+  if (!notification) return null;
+
   const { type, message } = notification;
   const isError = type === 'error';
 
   return (
-    <div className={`fixed top-5 right-5 z-50 p-4 rounded-lg shadow-lg flex items-center ${
-      isError ? 'bg-red-500' : 'bg-green-500'
-    } text-white`}>
+    <div
+      className={`fixed top-5 right-5 z-50 p-4 rounded-lg shadow-lg flex items-center ${
+        isError ? 'bg-red-500' : 'bg-green-500'
+      } text-white`}
+    >
       <AlertCircle className="w-5 h-5 mr-3" />
       <span>{message}</span>
-      <button onClick={onClose} className="ml-4 p-1 rounded-full hover:bg-white/20">
+      <button
+        onClick={onClose}
+        className="ml-4 p-1 rounded-full hover:bg-white/20"
+      >
         <X className="w-4 h-4" />
       </button>
     </div>
   );
 };
+
 
 const App = () => {
   const [currentUser, setCurrentUser] = useState(null);
