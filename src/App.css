@@ -1,0 +1,22 @@
+/* App-level animations and effects */
+button {
+  transition: all 0.2s ease-in-out;
+}
+
+input, select, textarea {
+  @apply transition-all duration-200;
+}
+
+.dark input, .dark select, .dark textarea {
+  @apply bg-gray-700 border-gray-600 text-white;
+}
+
+/* Smooth theme transitions */
+html {
+  transition: background-color 0.3s, color 0.3s;
+}
+
+/* Card shadow hover */
+.shadow-3xl {
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+}
